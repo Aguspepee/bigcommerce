@@ -1,31 +1,23 @@
 import axios from '../../utils/axios'
-import { withMiddleware } from '../../utils/middleware'
+import nextConnect from 'next-connect';
 
-const getAllProducts = async (req, res) => {
-  try {
-    const { data } = await axios.get('/catalog/products')
-    res.status(200).json(data)
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: 'Internal server error' })
-  }
-}
+// Create a Next.js API route using next-connect
+const handler = nextConnect();
 
-const getProductById = async (req, res) => {
-  const { id } = req.query
+// Route handlers
+handler.get(async (req, res) => {
+    try {
+        const queryParams = new URLSearchParams(req.query);
+        const { data } = await axios.get(`/catalog/products?${queryParams.toString()}`)
+        res.status(200).json({ products: data });
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
+});
 
-  try {
-    const { data } = await axios.get(`/catalog/products/${id}`)
-    res.status(200).json(data)
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: 'Internal server error' })
-  }
-}
+handler.all((req, res) => {
+    res.status(405).json({ message: 'Method Not Allowed' });
+});
 
-const handlers = {
-  GET: getAllProducts,
-  GET: getProductById,
-}
-
-export default withMiddleware(handlers)
+export default handler;
