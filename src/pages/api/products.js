@@ -4,12 +4,12 @@ import nextConnect from 'next-connect';
 // Create a Next.js API route using next-connect
 const handler = nextConnect();
 
-// Route handlers
+// Get Products
 handler.get(async (req, res) => {
     try {
         const queryParams = new URLSearchParams(req.query);
         const { data } = await axios.get(`/catalog/products?${queryParams.toString()}`)
-        res.status(200).json({ products: data });
+        res.status(200).json( data );
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: 'Internal server error' })

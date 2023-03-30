@@ -4,7 +4,7 @@ import nextConnect from 'next-connect';
 // Create a Next.js API route using next-connect
 const handler = nextConnect();
 
-// Route handlers
+//Get a cart by ID
 handler.get(async (req, res) => {
   console.log(req.params)
     try {
@@ -16,18 +16,16 @@ handler.get(async (req, res) => {
     }
 });
 
+//Create a cart
 handler.post(async (req, res) => {
   try {
-    const { line_item, custom_items, gift_certificates } = req.body;
-    const { data } = await axios.post('/carts', {
-      line_items: line_item,
-      custom_items,
-      gift_certificates,
-    });
-
+    console.log(req.body)
+    const { data } = await axios.post('/carts', 
+       req.body
+    );
     res.status(201).json({ cart: data });
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
