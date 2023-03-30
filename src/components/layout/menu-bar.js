@@ -6,7 +6,6 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Box, Button, Divider, Drawer, List, ListItem } from '@mui/material';
-import ProductCard from '../products/product-card';
 import ProductListItem from '../products/product-listitem';
 
 export default function MenuBar({ cart }) {

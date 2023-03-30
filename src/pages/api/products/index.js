@@ -1,4 +1,4 @@
-import axios from '../../utils/axios'
+import axios from '../../../utils/axios'
 import nextConnect from 'next-connect';
 
 // Create a Next.js API route using next-connect

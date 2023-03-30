@@ -1,4 +1,4 @@
-import axios from '../../utils/axios'
+import axios from '../../../utils/axios'
 import nextConnect from 'next-connect';
 
 // Create a Next.js API route using next-connect
@@ -6,7 +6,6 @@ const handler = nextConnect();
 
 //Get a cart by ID
 handler.get(async (req, res) => {
-  console.log(req.params)
     try {
         const { data } = await axios.get(`/carts/${req.query.id}`)
         res.status(200).json({ carts: data });
@@ -19,7 +18,6 @@ handler.get(async (req, res) => {
 //Create a cart
 handler.post(async (req, res) => {
   try {
-    console.log(req.body)
     const { data } = await axios.post('/carts', 
        req.body
     );

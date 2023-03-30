@@ -11,7 +11,8 @@ import {
 import { Add, Remove } from '@mui/icons-material';
 
 const ProductListItem = ({ product, quantity, onChangeQuantity }) => {
-  const [localQuantity, setLocalQuantity] = useState(quantity);
+  const [localQuantity, setLocalQuantity] = useState(product.quantity);
+  const cleanedName = product.name?.replace('[Sample] ', '');
 
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value);
@@ -24,12 +25,12 @@ const ProductListItem = ({ product, quantity, onChangeQuantity }) => {
       <CardMedia
         component="img"
         image={product.image_url}
-        alt={product.name}
+        alt={cleanedName}
         sx={{ width: '25%', minWidth: '10rem', objectFit: 'contain' }}
       />
       <CardContent sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
         <Typography variant="h6" component="h2">
-          {product.name}
+          {cleanedName}
         </Typography>
         <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
           {product.price}
